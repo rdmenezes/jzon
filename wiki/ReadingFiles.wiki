@@ -1,0 +1,73 @@
+#summary How to read JSON files
+#labels Phase-Implementation,Featured
+
+= Code =
+
+*file.json*
+{{{
+{
+	"name": "value",
+	"number": 20,
+	"anothernumber": 15.3,
+	"stuff": true,
+	"listOfStuff": [
+		"json",
+		"more stuff",
+		null,
+		false
+	]
+}
+}}}
+
+*main.cpp*
+{{{
+#include <Jzon.h>
+
+#include <iostream>
+
+int main()
+{
+	Jzon::Object rootNode = Jzon::FileReader::ReadFile("file.json")->AsObject();
+
+	for (Jzon::Object::Iterator it = rootNode.Begin(); it != rootNode.End(); ++it)
+	{
+		std::string &name = (*it).first;
+		Jzon::Node &node = (*it).second;
+			
+		std::cout << name << " = ";
+		if (node.IsValue())
+			std::cout << node.AsValue().AsString();
+		else if (node.IsArray())
+			std::cout << "*Array*";
+		else if (node.IsObject())
+			std::cout << "*Object*";
+		std::cout << std::endl;
+	}
+
+	if (rootNode.Get("listOfStuff").IsArray())
+	{
+		Jzon::Array &stuff = rootNode.Get("listOfStuff").AsArray();
+		for (Jzon::Array::Iterator it = stuff.Begin(); it != stuff.End(); ++it)
+		{
+			if ((*it).IsValue())
+				std::cout << (*it).AsValue().AsString() << std::endl;
+		}
+	}
+
+	return 0;
+}
+}}}
+
+= Result =
+
+{{{
+ name = value
+ number = 20
+ anothernumber = 15.3
+ stuff = true
+ listOfStuff = *Array*
+ json
+ more stuff
+ null
+ false
+}}}
