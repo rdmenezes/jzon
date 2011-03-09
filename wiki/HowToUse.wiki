@@ -1,0 +1,14 @@
+#summary #summary How to integrate Jzon in your project
+#labels Phase-Deploy,Featured
+
+= Introduction =
+
+There are two ways to integrate Jzon in your project.
+
+= Solution 1 =
+
+The easiest and recommended way is to just copy Jzon.h and Jzon.cpp directly into your project folder.
+
+= Solution 2 =
+
+The other way is to build a static or dynamic library, but I'm not going to go into any detail on how it's done.
