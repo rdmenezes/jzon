@@ -1,0 +1,54 @@
+#summary How to write JSON files
+#labels Phase-Implementation,Featured
+
+= Code =
+
+*main.cpp*
+{{{
+#include <Jzon.h>
+
+int main()
+{
+	Jzon::Object root;
+	root.Add("name", "value");
+	root.Add("number", 20);
+	root.Add("anothernumber", 15.3);
+	root.Add("stuff", true);
+
+	Jzon::Array listOfStuff;
+	listOfStuff.Add("json");
+	listOfStuff.Add("more stuff");
+	listOfStuff.Add(Jzon::null);
+	listOfStuff.Add(false);
+	root.Add("listOfStuff", listOfStuff);
+
+	Jzon::FileWriter::WriteFile("file.json", root);
+
+	return 0;
+}
+}}}
+
+= Result =
+
+*file.json*
+{{{
+{"name":"value","number":20,"anothernumber":15.3,"stuff":true,"listOfStuff":["json","more stuff",null,false]}
+}}}
+
+Note: Jzon can't write formatted files (yet).
+For the sake of readability a formatted version of file.json is included below.
+
+{{{
+{
+	"name": "value",
+	"number": 20,
+	"anothernumber": 15.3,
+	"stuff": true,
+	"listOfStuff": [
+		"json",
+		"more stuff",
+		null,
+		false
+	]
+}
+}}}
