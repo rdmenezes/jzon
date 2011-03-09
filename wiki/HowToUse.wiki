@@ -1,4 +1,4 @@
-#summary #summary How to integrate Jzon in your project
+#summary How to integrate Jzon in your project
 #labels Phase-Deploy,Featured
 
 = Introduction =
