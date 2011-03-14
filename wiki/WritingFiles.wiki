@@ -22,7 +22,7 @@ int main()
 	listOfStuff.Add(false);
 	root.Add("listOfStuff", listOfStuff);
 
-	Jzon::FileWriter::WriteFile("file.json", root);
+	Jzon::FileWriter::WriteFile("file.json", root, Jzon::StandardFormat);
 
 	return 0;
 }
@@ -31,13 +31,6 @@ int main()
 = Result =
 
 *file.json*
-{{{
-{"name":"value","number":20,"anothernumber":15.3,"stuff":true,"listOfStuff":["json","more stuff",null,false]}
-}}}
-
-Note: Jzon can't write formatted files (yet).
-For the sake of readability a formatted version of file.json is included below.
-
 {{{
 {
 	"name": "value",
@@ -52,3 +45,16 @@ For the sake of readability a formatted version of file.json is included below.
 	]
 }
 }}}
+
+= Formatting =
+
+You can change the way Jzon formats the file by defining a *Jzon::Format* and setting the members it holds.
+
+There are two pre-defined formats that you can use: *Jzon::StandardFormat* which formats the file as above and *Jzon::NoFormat* which doesn't use any formatting at all.
+
+===Jzon::Format===
+  * bool *newline* - If true sub-nodes will be written on separate lines.
+  * bool *spacing* - If true ":" and "," will be trailed by a space.
+  * bool *useTabs* - If true the lines will be indented by tabs instead of spaces.
+  * int *indentSize* - The number of spaces to indent (only applicable if *useTabs* is false).
+*Note:* to disable indentation, set *useTabs* to false and *indentSize* to 0.
