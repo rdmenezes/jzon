@@ -1,7 +1,9 @@
 #summary How to read JSON files
 #labels Phase-Implementation,Featured
 
-= Code =
+= From file =
+
+== Code ==
 
 *file.json*
 {{{
@@ -58,7 +60,7 @@ int main()
 }
 }}}
 
-= Result =
+== Result ==
 
 {{{
  name = value
@@ -70,4 +72,34 @@ int main()
  more stuff
  null
  false
+}}}
+
+= From string =
+
+== Code ==
+
+*main.cpp*
+{{{
+#include <Jzon.h>
+
+#include <iostream>
+
+int main()
+{
+	std::string jsonData = "{\"name\":\"John\",\"age\":20}";
+
+	Jzon::Object rootNode = Jzon::Node::Read(jsonData)->AsObject();
+
+	std::cout << "Name: " << rootNode.Get("name").AsValue().AsString() << std::endl;
+	std::cout << "Age: " << rootNode.Get("age").AsValue().AsInt() << std::endl;
+
+	return 0;
+}
+}}}
+
+== Result ==
+
+{{{
+ Name: John
+ Age: 20
 }}}
