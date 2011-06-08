@@ -31,7 +31,7 @@ int main()
 {
 	Jzon::Object rootNode = Jzon::FileReader::ReadFile("file.json")->AsObject();
 
-	for (Jzon::Object::Iterator it = rootNode.Begin(); it != rootNode.End(); ++it)
+	for (Jzon::Object::iterator it = rootNode.begin(); it != rootNode.end(); ++it)
 	{
 		std::string &name = (*it).first;
 		Jzon::Node &node = (*it).second;
@@ -49,7 +49,7 @@ int main()
 	if (rootNode.Get("listOfStuff").IsArray())
 	{
 		Jzon::Array &stuff = rootNode.Get("listOfStuff").AsArray();
-		for (Jzon::Array::Iterator it = stuff.Begin(); it != stuff.End(); ++it)
+		for (Jzon::Array::iterator it = stuff.begin(); it != stuff.end(); ++it)
 		{
 			if ((*it).IsValue())
 				std::cout << (*it).AsValue().AsString() << std::endl;
