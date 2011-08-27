@@ -38,7 +38,7 @@ int main()
 			
 		std::cout << name << " = ";
 		if (node.IsValue())
-			std::cout << node.AsValue().AsString();
+			std::cout << node.AsString();
 		else if (node.IsArray())
 			std::cout << "*Array*";
 		else if (node.IsObject())
@@ -52,7 +52,7 @@ int main()
 		for (Jzon::Array::iterator it = stuff.begin(); it != stuff.end(); ++it)
 		{
 			if ((*it).IsValue())
-				std::cout << (*it).AsValue().AsString() << std::endl;
+				std::cout << (*it).AsString() << std::endl;
 		}
 	}
 
@@ -90,8 +90,8 @@ int main()
 
 	Jzon::Object rootNode = Jzon::Node::Read(jsonData)->AsObject();
 
-	std::cout << "Name: " << rootNode.Get("name").AsValue().AsString() << std::endl;
-	std::cout << "Age: " << rootNode.Get("age").AsValue().AsInt() << std::endl;
+	std::cout << "Name: " << rootNode.Get("name").AsString() << std::endl;
+	std::cout << "Age: " << rootNode.Get("age").AsInt() << std::endl;
 
 	return 0;
 }
