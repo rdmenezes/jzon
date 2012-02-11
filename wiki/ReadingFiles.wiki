@@ -29,7 +29,8 @@
 
 int main()
 {
-	Jzon::Object rootNode = Jzon::FileReader::ReadFile("file.json")->AsObject();
+	Jzon::Object rootNode;
+	Jzon::FileReader::ReadFile("file.json", rootNode);
 
 	for (Jzon::Object::iterator it = rootNode.begin(); it != rootNode.end(); ++it)
 	{
@@ -88,7 +89,8 @@ int main()
 {
 	std::string jsonData = "{\"name\":\"John\",\"age\":20}";
 
-	Jzon::Object rootNode = Jzon::Node::Read(jsonData)->AsObject();
+	Jzon::Object rootNode;
+	rootNode.Read(jsonData);
 
 	std::cout << "Name: " << rootNode.Get("name").AsString() << std::endl;
 	std::cout << "Age: " << rootNode.Get("age").AsInt() << std::endl;
