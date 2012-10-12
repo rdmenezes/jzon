@@ -56,5 +56,5 @@ There are two pre-defined formats that you can use: *Jzon::StandardFormat* which
   * bool *newline* - If true sub-nodes will be written on separate lines.
   * bool *spacing* - If true ":" and "," will be trailed by a space.
   * bool *useTabs* - If true the lines will be indented by tabs instead of spaces.
-  * int *indentSize* - The number of spaces to indent (only applicable if *useTabs* is false).
-*Note:* to disable indentation, set *useTabs* to false and *indentSize* to 0.
+  * int *indentSize* - The number of spaces or tabs to indent with.
+*Note:* to disable indentation, *indentSize* to 0.
