@@ -23,7 +23,7 @@
 
 *main.cpp*
 {{{
-#include <Jzon.h>
+#include "Jzon.h"
 
 #include <iostream>
 
@@ -81,7 +81,7 @@ int main()
 
 *main.cpp*
 {{{
-#include <Jzon.h>
+#include "Jzon.h"
 
 #include <iostream>
 
@@ -90,10 +90,16 @@ int main()
 	std::string jsonData = "{\"name\":\"John\",\"age\":20}";
 
 	Jzon::Object rootNode;
-	rootNode.Read(jsonData);
-
-	std::cout << "Name: " << rootNode.Get("name").AsString() << std::endl;
-	std::cout << "Age: " << rootNode.Get("age").AsInt() << std::endl;
+	Jzon::Parser parser(rootNode, jsonData);
+	if (!parser.Parse())
+	{
+		std::cout << "Error: " << parser.GetError() << std::endl;
+	}
+	else
+	{
+		std::cout << "Name: " << rootNode.Get("name").AsString() << std::endl;
+		std::cout << "Age: " << rootNode.Get("age").AsInt() << std::endl;
+	}
 
 	return 0;
 }
