@@ -1,0 +1,7 @@
+#summary Get the source.
+
+=Source=
+
+The code is no longer hosted at Google Code.
+
+Go to *[https://github.com/Zguy/Jzon Jzon at GitHub]* for the latest revision.
