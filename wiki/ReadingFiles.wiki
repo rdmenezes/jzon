@@ -34,27 +34,35 @@ int main()
 
 	for (Jzon::Object::iterator it = rootNode.begin(); it != rootNode.end(); ++it)
 	{
-		std::string &name = (*it).first;
+		std::string name = (*it).first;
 		Jzon::Node &node = (*it).second;
-			
+
 		std::cout << name << " = ";
 		if (node.IsValue())
-			std::cout << node.AsString();
+		{
+			switch (node.AsValue().GetValueType())
+			{
+			case Jzon::Value::VT_NULL   : std::cout << "null"; break;
+			case Jzon::Value::VT_STRING : std::cout << node.ToString(); break;
+			case Jzon::Value::VT_NUMBER : std::cout << node.ToFloat(); break;
+			case Jzon::Value::VT_BOOL   : std::cout << (node.ToBool()?"true":"false"); break;
+			}
+		}
 		else if (node.IsArray())
+		{
 			std::cout << "*Array*";
+		}
 		else if (node.IsObject())
+		{
 			std::cout << "*Object*";
+		}
 		std::cout << std::endl;
 	}
 
-	if (rootNode.Get("listOfStuff").IsArray())
+	const Jzon::Array &stuff = rootNode.Get("listOfStuff").AsArray();
+	for (Jzon::Array::const_iterator it = stuff.begin(); it != stuff.end(); ++it)
 	{
-		Jzon::Array &stuff = rootNode.Get("listOfStuff").AsArray();
-		for (Jzon::Array::iterator it = stuff.begin(); it != stuff.end(); ++it)
-		{
-			if ((*it).IsValue())
-				std::cout << (*it).AsString() << std::endl;
-		}
+		std::cout << (*it).ToString() << std::endl;
 	}
 
 	return 0;
@@ -97,8 +105,8 @@ int main()
 	}
 	else
 	{
-		std::cout << "Name: " << rootNode.Get("name").AsString() << std::endl;
-		std::cout << "Age: " << rootNode.Get("age").AsInt() << std::endl;
+		std::cout << "Name: " << rootNode.Get("name").ToString() << std::endl;
+		std::cout << "Age: " << rootNode.Get("age").ToInt() << std::endl;
 	}
 
 	return 0;
